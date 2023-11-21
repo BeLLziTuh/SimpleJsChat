@@ -8,7 +8,7 @@ Using only: <br>
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white)
 
-And a simple websocket conection method [About!](https://www.npmjs.com/package/ws) <br>
+And a simple websocket conection method [About!](https://www.npmjs.com/package/ws) <br><br>
 Like this visual example: <br>
 💻User1 -> conection -> ◦°˚°◦.¸¸ server ¸¸.◦°˚°◦ <- conection <- User2💻
 
