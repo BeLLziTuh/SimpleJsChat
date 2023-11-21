@@ -1,6 +1,6 @@
 # Js Simple Chat:
 
-I made a simple realtime chat, like instagram private message to study something about websockets.
+I made a simple real time chat like a instagram private message, to study something about websockets.
 
 Using only: <br>
 > ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
