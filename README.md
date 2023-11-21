@@ -12,4 +12,4 @@ And a simple websocket conection method [About!](https://www.npmjs.com/package/w
 Like this visual example: <br>
 💻User1 -> conection -> ◦°˚°◦.¸¸ server ¸¸.◦°˚°◦ <- conection <- User2💻
 
-# Link: https://chat-frontend-fisx.onrender.com/
+# Link: https://chat-frontend-fisx.onrender.com
