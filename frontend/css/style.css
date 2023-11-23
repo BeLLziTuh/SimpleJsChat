@@ -13,6 +13,7 @@
     --DARKWHITE: #f2f2f2;
     --BLACK: #000000;
     --BLURPLE: #7289DA;
+    --RED: #ff0000;
 
     /* DARK THEME */
     --LIGHTGRAY: #424549;
@@ -186,10 +187,19 @@ body {
     color: var(--DARKWHITE);
     border-radius: 0 10px 10px 10px;
     align-self: flex-start;
+    border: var(--DARKWHITE) solid 1px;
 }
 
 .message__sender {
     display: block;
-    margin-bottom: 15px;
+    align-self: flex-end;
     font-weight: 700;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.message__sender__hr {
+    margin: 5px 0 10px 0;
+    width: 50px;
+    align-self: flex-end;
 }

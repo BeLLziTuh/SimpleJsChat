@@ -1,9 +1,7 @@
-// LOGIN ELEMENTS
 const login = document.querySelector(".login")
 const loginForm = login.querySelector(".login__form")
 const loginInput = login.querySelector(".login__input")
 
-// CHAT ELEMENTS
 const chat = document.querySelector(".chat")
 const chatForm = chat.querySelector(".chat__form")
 const chatInput = chat.querySelector(".chat__input")
@@ -21,11 +19,19 @@ const user = { id: "", name: "", color: "" }
 
 let websocket
 
-const createMessageSelfElement = (content) => {
+const createMessageSelfElement = (content, sender, senderColor) => {
     const div = document.createElement("div")
+    const span = document.createElement("span")
 
     div.classList.add("self__message")
-    div.innerHTML = content
+
+    span.classList.add("message__sender")
+    span.style.color = senderColor
+
+    div.appendChild(span)
+
+    span.innerHTML = `${sender} 《YOU》`
+    div.innerHTML += content
 
     return div
 }
@@ -33,13 +39,17 @@ const createMessageSelfElement = (content) => {
 const createMessageOtherElement = (content, sender, senderColor) => {
     const div = document.createElement("div")
     const span = document.createElement("span")
+    const hr = document.createElement("hr")
 
     div.classList.add("other__message")
 
     span.classList.add("message__sender")
     span.style.color = senderColor
 
+    hr.classList.add("message__sender__hr")
+
     div.appendChild(span)
+    div.appendChild(hr)
 
     span.innerHTML = sender
     div.innerHTML += content
@@ -63,9 +73,8 @@ const processMessage = ({ data }) => {
     const { userId, userName, userColor, content } = JSON.parse(data)
 
     const message =
-        userId == user.id
-            ? createMessageSelfElement(content)
-            : createMessageOtherElement(content, userName, userColor)
+        userId == user.id ?
+            createMessageSelfElement(content, userName, userColor) : createMessageOtherElement(content, userName, userColor)
 
     chatMessages.appendChild(message)
 
@@ -76,7 +85,7 @@ const handleLogin = (event) => {
     event.preventDefault()
 
     user.id = crypto.randomUUID()
-    user.name = loginInput.value
+    user.name = loginInput.value.toUpperCase()
     user.color = getRandomColor()
 
     login.style.display = "none"
