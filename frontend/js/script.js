@@ -47,6 +47,16 @@ const createMessageOtherElement = (content, sender) => {
     return div
 }
 
+const createMessageConsoleElement = (content) => {
+    const div = document.createElement("div")
+
+    div.classList.add("console__message")
+    
+    div.innerHTML = content
+
+    return div
+}
+
 const scrollScreen = () => {
     window.scrollTo({
         top: document.body.scrollHeight,
@@ -56,10 +66,18 @@ const scrollScreen = () => {
 
 const processMessage = ({ data }) => {
     const { userId, userName, content } = JSON.parse(data)
+    
+    const message = msgSenderVerify()
 
-    const message =
-        userId == user.id ?
-            createMessageSelfElement(content, userName) : createMessageOtherElement(content, userName)
+    function msgSenderVerify() {
+        if (userId == user.id) {
+            return createMessageSelfElement(content, userName)
+        } if (userId != user.id && userId == 1) {
+            return createMessageConsoleElement(content, userName)
+        } else {
+            return createMessageOtherElement(content, userName)
+        }
+    }
 
     chatMessages.appendChild(message)
 
@@ -77,6 +95,18 @@ const handleLogin = (event) => {
 
     websocket = new WebSocket("wss://chat-backend-q6gu.onrender.com")
     websocket.onmessage = processMessage
+    
+    websocket.onopen = () => {
+        const loiginNoticeMessage = {
+            userId: 1,
+            userName: 'SYSTEM',
+            content: `(◞ꈍ∇ꈍ)っ🎁(( ${user.name} )) ~~~> connected! ٩(º▽º๑)`
+        }
+
+        websocket.send(JSON.stringify(loiginNoticeMessage))
+    }
+
+    chatInput.value = ""
 }
 
 const sendMessage = (event) => {
