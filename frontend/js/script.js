@@ -1,23 +1,23 @@
-const login = document.querySelector(".login")
-const loginForm = login.querySelector(".login__form")
-const loginInput = login.querySelector(".login__input")
+const login = document.querySelector('.login')
+const loginForm = login.querySelector('.login__form')
+const loginInput = login.querySelector('.login__input')
 
-const chat = document.querySelector(".chat")
-const chatForm = chat.querySelector(".chat__form")
-const chatInput = chat.querySelector(".chat__input")
-const chatMessages = chat.querySelector(".chat__messages")
+const chat = document.querySelector('.chat')
+const chatForm = chat.querySelector('.chat__form')
+const chatInput = chat.querySelector('.chat__input')
+const chatMessages = chat.querySelector('.chat__messages')
 
-const user = { id: "", name: ""}
+const user = { id: '', name: ''}
 
 let websocket
 
 const createMessageSelfElement = (content, sender) => {
-    const div = document.createElement("div")
-    const span = document.createElement("span")
+    const div = document.createElement('div')
+    const span = document.createElement('span')
 
-    div.classList.add("self__message")
+    div.classList.add('self__message')
 
-    span.classList.add("message__sender")
+    span.classList.add('message__sender')
 
     div.appendChild(span)
 
@@ -28,15 +28,15 @@ const createMessageSelfElement = (content, sender) => {
 }
 
 const createMessageOtherElement = (content, sender) => {
-    const div = document.createElement("div")
-    const span = document.createElement("span")
-    const hr = document.createElement("hr")
+    const div = document.createElement('div')
+    const span = document.createElement('span')
+    const hr = document.createElement('hr')
 
-    div.classList.add("other__message")
+    div.classList.add('other__message')
 
-    span.classList.add("message__sender")
+    span.classList.add('message__sender')
 
-    hr.classList.add("message__sender__hr")
+    hr.classList.add('message__sender__hr')
 
     div.appendChild(span)
     div.appendChild(hr)
@@ -48,9 +48,9 @@ const createMessageOtherElement = (content, sender) => {
 }
 
 const createMessageConsoleElement = (content) => {
-    const div = document.createElement("div")
+    const div = document.createElement('div')
 
-    div.classList.add("console__message")
+    div.classList.add('console__message')
     
     div.innerHTML = content
 
@@ -60,7 +60,7 @@ const createMessageConsoleElement = (content) => {
 const scrollScreen = () => {
     window.scrollTo({
         top: document.body.scrollHeight,
-        behavior: "smooth"
+        behavior: 'smooth'
     })
 }
 
@@ -90,10 +90,10 @@ const handleLogin = (event) => {
     user.id = crypto.randomUUID()
     user.name = loginInput.value.toUpperCase()
 
-    login.style.display = "none"
-    chat.style.display = "flex"
+    login.style.display = 'none'
+    chat.style.display = 'flex'
 
-    websocket = new WebSocket("wss://chat-backend-q6gu.onrender.com")
+    websocket = new WebSocket('wss://chat-backend-q6gu.onrender.com')
     websocket.onmessage = processMessage
     
     websocket.onopen = () => {
@@ -106,7 +106,7 @@ const handleLogin = (event) => {
         websocket.send(JSON.stringify(loiginNoticeMessage))
     }
 
-    chatInput.value = ""
+    chatInput.value = ''
 }
 
 const sendMessage = (event) => {
@@ -120,8 +120,13 @@ const sendMessage = (event) => {
 
     websocket.send(JSON.stringify(message))
 
-    chatInput.value = ""
+    chatInput.value = ''
 }
 
-loginForm.addEventListener("submit", handleLogin)
-chatForm.addEventListener("submit", sendMessage)
+loginForm.addEventListener('submit', handleLogin)
+chatForm.addEventListener('submit', sendMessage)
+
+function rainbow() {
+    let cmsg = querySelector('.console__message')
+    cmsg.classList.add('rainbow__effect')
+}
