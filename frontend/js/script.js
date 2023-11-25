@@ -7,26 +7,17 @@ const chatForm = chat.querySelector(".chat__form")
 const chatInput = chat.querySelector(".chat__input")
 const chatMessages = chat.querySelector(".chat__messages")
 
-const colors = [
-    "#7289DA",
-    "#36135A",
-    "#F28F0C",
-    "#5EAEEB",
-    "#664400"
-]
-
-const user = { id: "", name: "", color: "" }
+const user = { id: "", name: ""}
 
 let websocket
 
-const createMessageSelfElement = (content, sender, senderColor) => {
+const createMessageSelfElement = (content, sender) => {
     const div = document.createElement("div")
     const span = document.createElement("span")
 
     div.classList.add("self__message")
 
     span.classList.add("message__sender")
-    span.style.color = senderColor
 
     div.appendChild(span)
 
@@ -36,7 +27,7 @@ const createMessageSelfElement = (content, sender, senderColor) => {
     return div
 }
 
-const createMessageOtherElement = (content, sender, senderColor) => {
+const createMessageOtherElement = (content, sender) => {
     const div = document.createElement("div")
     const span = document.createElement("span")
     const hr = document.createElement("hr")
@@ -44,7 +35,6 @@ const createMessageOtherElement = (content, sender, senderColor) => {
     div.classList.add("other__message")
 
     span.classList.add("message__sender")
-    span.style.color = senderColor
 
     hr.classList.add("message__sender__hr")
 
@@ -57,11 +47,6 @@ const createMessageOtherElement = (content, sender, senderColor) => {
     return div
 }
 
-const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colors.length)
-    return colors[randomIndex]
-}
-
 const scrollScreen = () => {
     window.scrollTo({
         top: document.body.scrollHeight,
@@ -70,11 +55,11 @@ const scrollScreen = () => {
 }
 
 const processMessage = ({ data }) => {
-    const { userId, userName, userColor, content } = JSON.parse(data)
+    const { userId, userName, content } = JSON.parse(data)
 
     const message =
         userId == user.id ?
-            createMessageSelfElement(content, userName, userColor) : createMessageOtherElement(content, userName, userColor)
+            createMessageSelfElement(content, userName) : createMessageOtherElement(content, userName)
 
     chatMessages.appendChild(message)
 
@@ -86,7 +71,6 @@ const handleLogin = (event) => {
 
     user.id = crypto.randomUUID()
     user.name = loginInput.value.toUpperCase()
-    user.color = getRandomColor()
 
     login.style.display = "none"
     chat.style.display = "flex"
@@ -101,7 +85,6 @@ const sendMessage = (event) => {
     const message = {
         userId: user.id,
         userName: user.name,
-        userColor: user.color,
         content: chatInput.value
     }
 

@@ -190,7 +190,12 @@ body {
     border: var(--DARKWHITE) solid 1px;
 }
 
+.other__message > span {
+    align-self: flex-start;
+}
+
 .message__sender {
+    color: var(--BLURPLE);
     display: block;
     align-self: flex-end;
     font-weight: 700;
@@ -200,6 +205,6 @@ body {
 
 .message__sender__hr {
     margin: 5px 0 10px 0;
-    width: 50px;
-    align-self: flex-end;
+    width: 35px;
+    align-self: flex-start;
 }
