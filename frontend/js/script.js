@@ -125,8 +125,3 @@ const sendMessage = (event) => {
 
 loginForm.addEventListener('submit', handleLogin)
 chatForm.addEventListener('submit', sendMessage)
-
-function rainbow() {
-    let cmsg = querySelector('.console__message')
-    cmsg.classList.add('rainbow__effect')
-}
