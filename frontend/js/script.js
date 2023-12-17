@@ -127,5 +127,5 @@ loginForm.addEventListener('submit', handleLogin)
 chatForm.addEventListener('submit', sendMessage)
 
 function rainbow(){
-    console.log('ok')
+    span.classList.add('rainbow_effect')
 }
